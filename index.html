@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<>
+<meta charset="UTF-8">
+<title>Unique Calculator</title>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+}
+
+.calculator {
+    background: #1c1f26;
+    padding: 25px;
+    border-radius: 25px;
+    width: 300px;
+    box-shadow: 
+        10px 10px 25px #0b0d11,
+        -10px -10px 25px #2a2f3a;
+}
+
+.display {
+    height: 70px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 26px;
+    text-align: right;
+    color: #00ffcc;
+    background: #111418;
+    box-shadow: inset 5px 5px 10px #0a0c0f,
+                inset -5px -5px 10px #1a1d23;
+    overflow-x: auto;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+button {
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    color: #e0e0e0;
+    background: #1c1f26;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 
+        5px 5px 10px #0b0d11,
+        -5px -5px 10px #2a2f3a;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        3px 3px 8px #0b0d11,
+        -3px -3px 8px #2a2f3a;
+}
+
+button:active {
+    transform: scale(0.95);
+    box-shadow: inset 3px 3px 6px #0b0d11,
+                inset -3px -3px 6px #2a2f3a;
+}
+
+.operator {
+    color: #ff9f43;
+}
+
+.equal {
+    grid-column: span 2;
+    background: linear-gradient(135deg, #00c9ff, #92fe9d);
+    color: #000;
+    font-weight: bold;
+}
+
+.clear {
+    color: #ff4d4d;
+}
+</style>
+</head>
+<body>
+
+<div class="calculator">
+    <div class="display" id="display"></div>
+
+    <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button onclick="deleteLast()">⌫</button>
+        <button onclick="append('%')">%</button>
+        <button class="operator" onclick="append('/')">÷</button>
+
+        <button onclick="append('7')">7</button>
+        <button onclick="append('8')">8</button>
+        <button onclick="append('9')">9</button>
+        <button class="operator" onclick="append('*')">×</button>
+
+        <button onclick="append('4')">4</button>
+        <button onclick="append('5')">5</button>
+        <button onclick="append('6')">6</button>
+        <button class="operator" onclick="append('-')">−</button>
+
+        <button onclick="append('1')">1</button>
+        <button onclick="append('2')">2</button>
+        <button onclick="append('3')">3</button>
+        <button class="operator" onclick="append('+')">+</button>
+
+        <button onclick="append('0')">0</button>
+        <button onclick="append('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script>
+    let display = document.getElementById("display");
+
+    function append(value) {
+        display.innerText += value;
+    }
+
+    function clearDisplay() {
+        display.innerText = "";
+    }
+
+    function deleteLast() {
+        display.innerText = display.innerText.slice(0, -1);
+    }
+
+    function calculate() {
+        try {
+            display.innerText = eval(display.innerText);
+        } catch {
+            display.innerText = "Error";
+        }
+    }
+</script>
+
+</body>
+</html>
